@@ -24,7 +24,7 @@
 
 #include <common/hip_utils.hpp>
 #include <common/matrix.hpp>
-#include <hgemm/hgemm.hpp>
+#include <hgemm.hpp>
 
 template<kernel_type K_TYPE>
 struct layout_selector
@@ -208,7 +208,8 @@ int main(int argc, char** argv)
                             {512, 512, 512},
                             {1024, 1024, 1024},
                             {2048, 2048, 2048},
-                            {4096, 4096, 4096}}
+                            {4096, 4096, 4096},
+                            {8192, 8192, 8192}}
     };
 
     run_all_kernels<kernel_type::shared,

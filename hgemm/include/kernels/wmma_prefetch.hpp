@@ -26,7 +26,7 @@
 #define HIP_WMMA_PREFETCH_HPP
 
 #include <common/matrix.hpp>
-#include <hgemm/kernels/common.hpp>
+#include <kernels/common.hpp>
 
 template<>
 struct wmma_config<kernel_type::wmma_prefetch>
@@ -352,6 +352,7 @@ __global__ auto __launch_bounds__(warpSize * config_p::total_warps)
         }
 
         // Store prefetched data to shared memory
+        if(k_tile + config_p::block_k < K)
         {
             // Store A registers to shared memory (maintain column-major)
             for(int i = tid; i < total_vectors_a; i += num_threads)
